@@ -1,0 +1,75 @@
+import java.util.HashMap;
+import java.util.Map;
+
+public class LibraryCatalogue {
+
+    private Map<String, Book> catalogue;
+
+    public LibraryCatalogue() {
+        catalogue = new HashMap<>();
+    }
+
+    public void addBook(Book book) {
+        catalogue.put(book.getTitle(), book);
+    }
+
+    public Book findBook(String title) {
+        return catalogue.get(title);
+    }
+
+    public void removeBook(String title) {
+        catalogue.remove(title);
+    }
+
+    public void listBooks() {
+        for (Book book : catalogue.values()) {
+            System.out.println(book);
+        }
+    }
+
+    public static void main(String[] args) {
+        LibraryCatalogue catalogue = new LibraryCatalogue();
+
+        catalogue.addBook(new Book("1984", "George Orwell", 328));
+        catalogue.addBook(new Book("The Catcher in the Rye", "J.D. Salinger", 234));
+        catalogue.addBook(new Book("To Kill a Mockingbird", "Harper Lee", 281));
+
+        catalogue.listBooks();
+
+        Book book = catalogue.findBook("1984");
+        System.out.println("Book found: " + book);
+
+        catalogue.removeBook("The Catcher in the Rye");
+        catalogue.listBooks();
+    }
+}
+
+class Book {
+
+    private String title;
+    private String author;
+    private int numberOfPages;
+
+    public Book(String title, String author, int numberOfPages) {
+        this.title = title;
+        this.author = author;
+        this.numberOfPages = numberOfPages;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public int getNumberOfPages() {
+        return numberOfPages;
+    }
+
+    @Override
+    public String toString() {
+        return "Title: " + title + ", Author: " + author + ", Pages: " + numberOfPages;
+    }
+}
